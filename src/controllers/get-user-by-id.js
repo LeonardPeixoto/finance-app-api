@@ -12,6 +12,12 @@ export class GetUserByIdController {
                     message: 'Invalid user id',
                 })
             }
+            if (!user) {
+                return badRequest({
+                    statusCode: 404,
+                    message: 'User not found',
+                })
+            }
             const getUserByIdUseCase = new GetUserByIdUseCase()
             const user = await getUserByIdUseCase.execute(httpRequest.params.userId)
             return okRequest(user)
