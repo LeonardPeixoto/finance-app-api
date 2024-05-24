@@ -1,8 +1,8 @@
-import { PostgresHelper } from '../../db/postgres/helper'
+import { PostgresHelper } from '../../db/postgres/helper.js'
 
 export class PostgresCreateUserRepository {
     async execute(createUserParams) {
-        const results = await PostgresHelper.query(
+        await PostgresHelper.query(
             'INSERT INTO users (ID, first_name, last_name, email, password) VALUES ($1, $2, $3, $4, $5)',
             [
                 createUserParams.ID,
@@ -12,6 +12,9 @@ export class PostgresCreateUserRepository {
                 createUserParams.password,
             ],
         )
-        return results[0]
+
+        const createdUser = await PostgresHelper.query('SELECT * FROM users WHERE ID = $1', [createUserParams.ID])
+
+        return createdUser[0]
     }
 }
