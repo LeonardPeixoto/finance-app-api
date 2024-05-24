@@ -18,3 +18,10 @@ export const serverError = (body) => {
         body,
     }
 }
+
+export const okRequest = (body) => {
+    return {
+        statusCode: 200,
+        body,
+    }
+}
