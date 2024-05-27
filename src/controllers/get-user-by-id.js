@@ -12,7 +12,7 @@ export class GetUserByIdController {
                     message: 'Invalid user id',
                 })
             }
-            if (!user) {
+            if (!httpRequest.params.userId) {
                 return badRequest({
                     statusCode: 404,
                     message: 'User not found',
